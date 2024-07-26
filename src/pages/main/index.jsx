@@ -41,7 +41,6 @@ import {
   gallery3,
   gallery4,
   gallery5,
-  footerPhoto,
   videoCouple,
   videoBg,
   eventPhoto,
