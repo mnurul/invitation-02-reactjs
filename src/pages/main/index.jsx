@@ -44,6 +44,8 @@ import {
   footerPhoto,
   videoCouple,
   videoBg,
+  eventPhoto,
+  eventBannerPhoto,
 } from "../../assets";
 import ModalImage from "../components/ModalImage";
 import ModalVideo from "../components/ModalVideo";
@@ -121,7 +123,7 @@ const Main = () => {
   const renderer = ({ days, hours, minutes, seconds, completed }) => {
     if (completed) {
       return (
-        <div className="flex flex-row items-center justify-between mt-44 gap-9">
+        <div className="flex flex-row items-center justify-between mt-4 gap-9">
           <div className="flex flex-col items-center justify-center gap-2">
             <div className="p-2 text-base text-white border-b-2 roboto-bold border-soft-white">
               00
@@ -158,7 +160,7 @@ const Main = () => {
       );
     } else {
       return (
-        <div className="flex flex-row items-center justify-between mt-44 gap-9">
+        <div className="flex flex-row items-center justify-between mt-4 gap-9">
           <div className="flex flex-col items-center justify-center gap-2">
             <div className="p-2 text-base text-white border-b-2 roboto-bold border-soft-white">
               {days}
@@ -195,7 +197,7 @@ const Main = () => {
       );
     }
   };
-  // harus dari env
+
   const targetDate = new Date(import.meta.env.VITE_CLIENT_DATE_COUNTDOWN);
 
   // import sal animate on scroll
@@ -308,42 +310,38 @@ const Main = () => {
             className={`container flex flex-col items-center h-full relative`}
           >
             {/* section event */}
-            <span className="mt-40 text-xs font-light text-white roboto-light">
-              {t("home.title")}
-            </span>
-            <span className="mt-4 text-5xl font-light text-white great-vibes-regular">
-              {import.meta.env.VITE_CLIENT_NAME}
-            </span>
-            <span className="mt-2 text-xs font-light text-white roboto-light">
-              {import.meta.env.VITE_CLIENT_DATE}
-            </span>
+            <img
+              src={eventPhoto}
+              className="w-[293px] h-[293px] object-cover mt-20"
+            />
             <Countdown date={targetDate} renderer={renderer} />
             <span
-              className="px-10 mt-24 text-sm text-justify text-white text-pretty roboto-regular"
+              className="px-10 mt-16 text-sm text-center text-white text-pretty roboto-regular"
               data-sal="fade"
               data-sal-duration="2000"
             >
               {t("home.qoutes")}
             </span>
+            <img src={eventBannerPhoto} className="mt-10" />
 
             {/* section man */}
             <div className="flex flex-col items-start w-full px-10">
               <img
                 src={manPhoto}
-                className="mt-12"
+                className="mt-16"
                 data-sal="zoom-out"
                 data-sal-duration="2000"
                 loading="lazy"
               />
               <span
-                className="mt-5 text-xl text-white roboto-medium"
+                className="w-full mt-5 text-xl text-center text-white roboto-medium"
                 data-sal="fade"
                 data-sal-duration="2000"
               >
                 Elgi Riyadi Putra
               </span>
               <span
-                className="text-xs text-white"
+                className="w-full text-xs text-center text-white"
                 data-sal="fade"
                 data-sal-duration="2000"
               >
@@ -373,7 +371,7 @@ const Main = () => {
             </div>
 
             {/* section woman */}
-            <div className="flex flex-col items-end w-full px-10 mt-12 mb-12">
+            <div className="flex flex-col items-end w-full px-10 mb-12 mt-14">
               <img
                 src={womanPhoto}
                 data-sal="zoom-out"
@@ -381,14 +379,14 @@ const Main = () => {
                 loading="lazy"
               />
               <span
-                className="mt-5 text-xl text-white roboto-medium"
+                className="w-full mt-5 text-xl text-center text-white roboto-medium"
                 data-sal="fade"
                 data-sal-duration="2000"
               >
                 Qisti Astami Marifah
               </span>
               <span
-                className="text-xs text-white"
+                className="w-full text-xs text-center text-white"
                 data-sal="fade"
                 data-sal-duration="2000"
               >
@@ -415,40 +413,44 @@ const Main = () => {
                 />
                 <span className="text-sm text-white roboto-medium">Qisti</span>
               </Link>
+              <div className="h-[2px] bg-soft-white w-full rounded mt-14">
+                &nbsp;
+              </div>
             </div>
 
             {/* section journey and holy motrimony*/}
             <div className={`container max-w-screen-sm flex flex-col px-10`}>
               <span
-                className="mt-5 text-4xl leading-tight text-white roboto-light"
+                className="text-4xl leading-tight text-center text-white roboto-light"
                 data-sal="fade"
                 data-sal-duration="2000"
               >
                 {t("home.journeyTitleStart")} <br />
-                <span className="roboto-medium">Qisti & Elgi</span> <br />
+                {t("home.journeyTitleMiddle")}{" "}
+                <span className="roboto-medium">
+                  {import.meta.env.VITE_CLIENT_NAME}
+                </span>{" "}
+                <br />
                 {t("home.journeyTitleEnd")}
               </span>
               <span
-                className="mt-2 text-sm text-white text-pretty"
+                className="mt-4 text-sm text-center text-white"
                 data-sal="fade"
                 data-sal-duration="2000"
-                style={{ textAlign: "justify" }}
               >
                 {t("home.journeyDetail")}
               </span>
               <span
-                className="mt-2 text-sm text-white text-pretty"
+                className="mt-2 text-sm text-center text-white"
                 data-sal="fade"
                 data-sal-duration="2000"
-                style={{ textAlign: "justify" }}
               >
                 {t("home.journeyDetail1")}
               </span>
               <span
-                className="mt-2 text-sm text-white text-pretty"
+                className="mt-2 text-sm text-center text-white"
                 data-sal="fade"
                 data-sal-duration="2000"
-                style={{ textAlign: "justify" }}
               >
                 {t("home.journeyDetail2")}
               </span>
@@ -460,7 +462,7 @@ const Main = () => {
                 {t("home.reception")}
               </span>
               <span
-                className="mt-5 text-sm text-white"
+                className="w-full mt-5 text-sm text-center text-white"
                 data-sal="fade"
                 data-sal-duration="2000"
               >
@@ -468,7 +470,7 @@ const Main = () => {
                 <br />
                 {t("home.receptionTime")}
               </span>
-              <div className="flex flex-row items-center justify-start gap-3 mt-3">
+              <div className="flex flex-row items-center justify-start justify-center w-full gap-3 mt-3">
                 <CiCalendarDate className="text-xl text-white" />
                 <button
                   id="btnAddToCalender"
@@ -478,44 +480,57 @@ const Main = () => {
                 </button>
               </div>
               <span
-                className="text-sm text-white mt-7 roboto-medium"
+                className="w-full text-sm text-center text-white mt-7 roboto-medium"
                 data-sal="fade"
                 data-sal-duration="2000"
               >
                 Taman Ponyo
               </span>
               <span
-                className="mt-1 text-xs leading-normal text-white"
+                className="w-full mt-1 text-xs leading-normal text-center text-white"
                 data-sal="fade"
                 data-sal-duration="2000"
               >
                 Jl. Raya Cinunuk No.186, Cinunuk, Kec. Cileunyi, Kabupaten
                 Bandung, Jawa Barat 40624
               </span>
-              <Link
-                to="https://maps.app.goo.gl/LoxzCDED2PhWCJB16"
-                target="_blank"
-                className="flex flex-row items-center gap-3 mt-5 mb-10"
-                data-sal="fade"
-                data-sal-duration="2000"
-              >
-                <img src={icMaps} className="object-cover h-5" loading="lazy" />
-                <span className="text-sm text-white roboto-medium">
-                  {t("home.direct")}
-                </span>
-              </Link>
+              <div className="flex justify-center w-full">
+                <Link
+                  to="https://maps.app.goo.gl/LoxzCDED2PhWCJB16"
+                  target="_blank"
+                  className="flex flex-row gap-3 mt-5 mb-10 text-center"
+                  data-sal="fade"
+                  data-sal-duration="2000"
+                >
+                  <img
+                    src={icMaps}
+                    className="object-cover h-5"
+                    loading="lazy"
+                  />
+                  <span className="text-sm text-white roboto-medium">
+                    {t("home.direct")}
+                  </span>
+                </Link>
+              </div>
             </div>
 
             {/* section dresscode */}
             <div className={`container max-w-screen-sm flex flex-col px-10`}>
               <span
-                className="mt-8 text-4xl text-white roboto-light"
+                className="w-full mt-8 text-4xl text-center text-white roboto-light"
                 data-sal="fade"
                 data-sal-duration="2000"
               >
                 {t("home.dressCode")}
               </span>
-              <div className="flex flex-row flex-wrap gap-3 mt-5">
+              <div className="flex flex-row flex-wrap justify-center gap-2 mt-5">
+                <div
+                  className="w-[80px] h-[80px] bg-[#dac0a3] rounded-tl-[180px]"
+                  data-sal="fade"
+                  data-sal-duration="2000"
+                >
+                  &nbsp;
+                </div>
                 <div
                   className="w-[80px] h-[80px] bg-[#124076]"
                   data-sal="fade"
@@ -524,7 +539,7 @@ const Main = () => {
                   &nbsp;
                 </div>
                 <div
-                  className="w-[80px] h-[80px] bg-[#dfdfdf]"
+                  className="w-[80px] h-[80px] bg-[#dfdfdf] rounded-tr-[180px]"
                   data-sal="fade"
                   data-sal-duration="2000"
                 >
@@ -553,14 +568,14 @@ const Main = () => {
                 </div>
               </div>
               <span
-                className="mt-12 text-2xl text-white roboto-light"
+                className="w-full mt-12 text-2xl text-center text-white roboto-light"
                 data-sal="fade"
                 data-sal-duration="2000"
               >
                 {t("home.greetingTitle")}
               </span>
               <span
-                className="mt-5 text-sm text-white"
+                className="w-full mt-5 text-sm text-center text-white"
                 data-sal="fade"
                 data-sal-duration="2000"
               >
@@ -623,7 +638,7 @@ const Main = () => {
               </form>
               {dataMessage.length > 0 && (
                 <>
-                  <span className="mt-2 text-2xl text-white roboto-light">
+                  <span className="w-full mt-2 text-2xl text-center text-white roboto-light">
                     {t("home.greetingResultTitle")}
                   </span>
                   <div className="mt-4 mb-5 overflow-scroll max-h-[300px] flex gap-4 flex-col">
@@ -741,20 +756,20 @@ const Main = () => {
             {/* section engagement or prewedding */}
             <div className={`container max-w-screen-sm flex flex-col px-10`}>
               <span
-                className="mt-20 text-4xl text-white roboto-light"
+                className="w-full mt-20 text-4xl text-center text-white roboto-light"
                 data-sal="fade"
                 data-sal-duration="2000"
               >
                 {t("home.gallery")}
               </span>
               <div className="flex flex-col items-center justify-center mt-8">
-                <div className="flex flex-row w-full mb-4">
+                <div className="flex flex-row w-full mb-2">
                   <video
                     autoPlay
                     loop
                     muted
                     playsInline
-                    className="object-cover w-full h-full"
+                    className="object-cover w-full h-full rounded-lg"
                     data-sal="zoom-out"
                     data-sal-duration="2000"
                     loading="lazy"
@@ -765,10 +780,10 @@ const Main = () => {
                     <source src={videoCouple}></source>
                   </video>
                 </div>
-                <div className="flex flex-row w-full">
+                <div className="flex flex-row w-full gap-2">
                   <img
                     src={gallery1}
-                    className="h-[215px] w-full object-cover"
+                    className="h-[215px] w-full object-cover rounded-lg"
                     data-sal="zoom-out"
                     data-sal-duration="2000"
                     loading="lazy"
@@ -778,7 +793,7 @@ const Main = () => {
                   />
                   <img
                     src={gallery2}
-                    className="h-[215px] w-full object-cover"
+                    className="h-[215px] w-full object-cover rounded-lg"
                     data-sal="zoom-out"
                     data-sal-duration="2000"
                     loading="lazy"
@@ -787,10 +802,10 @@ const Main = () => {
                     }}
                   />
                 </div>
-                <div className="flex flex-row w-full">
+                <div className="flex flex-row w-full my-2">
                   <img
                     src={gallery3}
-                    className="h-[195px] w-full object-cover"
+                    className="h-[195px] w-full object-cover rounded-lg"
                     data-sal="zoom-out"
                     data-sal-duration="2000"
                     loading="lazy"
@@ -799,10 +814,10 @@ const Main = () => {
                     }}
                   />
                 </div>
-                <div className="flex flex-row w-full">
+                <div className="flex flex-row w-full gap-2">
                   <img
                     src={gallery4}
-                    className="h-[215px] w-full object-cover"
+                    className="h-[215px] w-full object-cover rounded-lg"
                     data-sal="zoom-out"
                     data-sal-duration="2000"
                     loading="lazy"
@@ -812,7 +827,7 @@ const Main = () => {
                   />
                   <img
                     src={gallery5}
-                    className="h-[215px] w-full object-cover"
+                    className="h-[215px] w-full object-cover rounded-lg"
                     data-sal="zoom-out"
                     data-sal-duration="2000"
                     loading="lazy"
@@ -826,32 +841,25 @@ const Main = () => {
 
             {/* section footer */}
             <div className={`container max-w-screen-sm flex flex-col px-10`}>
-              <img
-                src={footerPhoto}
-                className="mt-20 text-center"
-                data-sal="zoom-out"
-                data-sal-duration="2000"
-                loading="lazy"
-              />
               <span
-                className="mt-8 text-3xl leading-tight text-white roboto-light"
+                className="w-full text-3xl leading-tight text-center text-white mt-28 roboto-light"
                 data-sal="fade"
                 data-sal-duration="2000"
                 dangerouslySetInnerHTML={{ __html: t("home.footerTitle") }}
               ></span>
               <span
-                className="mt-4 text-sm leading-6 text-white text-pretty roboto-light"
+                className="w-full mt-4 text-sm leading-6 text-center text-white text-pretty roboto-light"
                 data-sal="fade"
                 data-sal-duration="2000"
               >
                 {t("home.footerSubtitle")}
               </span>
               <span
-                className="text-2xl font-light text-white mt-11 great-vibes-regular"
+                className="w-full text-2xl font-light text-center text-white mt-11 great-vibes-regular"
                 data-sal="fade"
                 data-sal-duration="2000"
               >
-                Qisti & Elgi
+                {import.meta.env.VITE_CLIENT_NAME}
               </span>
               <div className="mb-5 mt-36">
                 <Footer data-sal="fade" data-sal-duration="2000" />

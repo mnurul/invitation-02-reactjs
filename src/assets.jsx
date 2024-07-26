@@ -8,6 +8,10 @@ import videoCouple from "./assets/videos/video-couple.mp4";
 // import asset sec cover
 import coupleCover from "./assets/images/couple-cover.png";
 
+// import asset sec countdown
+import eventPhoto from "./assets/images/img-event-photo.png";
+import eventBannerPhoto from "./assets/images/img-event-banner.png";
+
 // import asset sec about
 import manPhoto from "./assets/images/man.png";
 import womanPhoto from "./assets/images/women.png";
@@ -81,4 +85,6 @@ export {
   videoBg,
   logoWedinc,
   coupleCover,
+  eventPhoto,
+  eventBannerPhoto,
 };
