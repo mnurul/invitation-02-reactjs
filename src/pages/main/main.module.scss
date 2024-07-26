@@ -1,0 +1,40 @@
+.event {
+    background-image: url('../../assets/images/bg-1.png');
+}
+
+.about {
+    background-image: url('../../assets/images/bg-2.png');
+}
+
+.journey {
+    background-image: url('../../assets/images/bg-3.png');
+}
+
+.dresscode {
+    background-image: url('../../assets/images/bg-4.png');
+}
+
+.weddingGift {
+    background-image: url('../../assets/images/bg-5.png');
+}
+
+.footer {
+    background-image: url('../../assets/images/bg-7.png');
+}
+
+.buttonMusicWrapper {
+    position: fixed;
+    bottom: 40px;
+    left: 83vw;
+    color: white;
+}
+
+.buttonMusic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    // background-color: #8e9775;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
