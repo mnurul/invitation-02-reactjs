@@ -14,6 +14,7 @@ export default {
         "dark-green-1": "#4a503d",
         "dark-green-disabled": "#7a8363",
         "dark-green-1-disabled": "#353a2c",
+        blue: "#5a797b",
       },
     },
   },

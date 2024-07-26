@@ -278,11 +278,11 @@ const Main = () => {
         )}
 
         <div
-          className={`bg-black container max-w-screen-sm h-svh overflow-scroll flex flex-col`}
+          className={`bg-blue container max-w-screen-sm h-svh overflow-scroll flex flex-col`}
           onScroll={handleScroll}
         >
           {/* bg video */}
-          <div className="absolute flex flex-row w-full h-full max-w-screen-sm">
+          {/* <div className="absolute flex flex-row w-full h-full max-w-screen-sm">
             <video
               autoPlay
               loop
@@ -297,7 +297,7 @@ const Main = () => {
             >
               <source src={videoBg}></source>
             </video>
-          </div>
+          </div> */}
 
           <div
             className={`container fixed items-center z-20 right-1 flex flex-col  ${activeNavbar}`}
