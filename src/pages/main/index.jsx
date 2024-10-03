@@ -7,6 +7,7 @@ import moment from "moment";
 import Countdown from "react-countdown";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { ref, getStorage } from "firebase/storage";
 
 // import icons
 import { CiCalendarDate } from "react-icons/ci";
@@ -67,6 +68,20 @@ const Main = () => {
   const [imageShow, setImageShow] = useState("");
   const [videoShow, setVideoShow] = useState("");
   const [activeNavbar, setActiveNavbar] = useState("");
+  const [data, setData] = useState([]);
+
+  // gallery
+  const [personMan, setPersonMan] = useState("");
+  const [personWoman, setPersonWoman] = useState("");
+  const [landscape1, setLandscape1] = useState("");
+  const [landscape2, setLandscape2] = useState("");
+  const [landscape3, setLandscape3] = useState("");
+  const [potrait1, setPotrait1] = useState("");
+  const [potrait2, setPotrait2] = useState("");
+  const [potrait3, setPotrait3] = useState("");
+  const [potrait4, setPotrait4] = useState("");
+  const [videoPotrait, setVideoPotrait] = useState("");
+  const [videoLandscape, setVideoLandscape] = useState("");
 
   useEffect(() => {
     setPlay(true);
@@ -258,6 +273,89 @@ const Main = () => {
   // darkmode
   const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
 
+  const storage = getStorage();
+
+  // https://www.wedinc.id/api/customer/dim16605092024
+  useEffect(() => {
+    fetch(
+      `https://www.wedinc.id/api/customer/${import.meta.env.VITE_CLIENT_ID}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.statusCode === 200) {
+          setData(data.dataInvitation);
+
+          data.dataGallery.forEach((element) => {
+            const spaceRef = ref(storage, element.image);
+
+            switch (element.type_image) {
+              case "person_man":
+                setPersonMan(
+                  `https://firebasestorage.googleapis.com/v0/b/weddinc-app.appspot.com/o/customer%2F${spaceRef.name}?alt=media&token=76144a38-b34a-484e-a56e-226e95f97f04`
+                );
+                break;
+              case "person_woman":
+                setPersonWoman(
+                  `https://firebasestorage.googleapis.com/v0/b/weddinc-app.appspot.com/o/customer%2F${spaceRef.name}?alt=media&token=76144a38-b34a-484e-a56e-226e95f97f04`
+                );
+                break;
+              case "landscape1":
+                setLandscape1(
+                  `https://firebasestorage.googleapis.com/v0/b/weddinc-app.appspot.com/o/customer%2F${spaceRef.name}?alt=media&token=76144a38-b34a-484e-a56e-226e95f97f04`
+                );
+                break;
+              case "landscape2":
+                setLandscape2(
+                  `https://firebasestorage.googleapis.com/v0/b/weddinc-app.appspot.com/o/customer%2F${spaceRef.name}?alt=media&token=76144a38-b34a-484e-a56e-226e95f97f04`
+                );
+                break;
+              case "landscape3":
+                setLandscape3(
+                  `https://firebasestorage.googleapis.com/v0/b/weddinc-app.appspot.com/o/customer%2F${spaceRef.name}?alt=media&token=76144a38-b34a-484e-a56e-226e95f97f04`
+                );
+                break;
+              case "potrait1":
+                setPotrait1(
+                  `https://firebasestorage.googleapis.com/v0/b/weddinc-app.appspot.com/o/customer%2F${spaceRef.name}?alt=media&token=76144a38-b34a-484e-a56e-226e95f97f04`
+                );
+                break;
+              case "potrait2":
+                setPotrait2(
+                  `https://firebasestorage.googleapis.com/v0/b/weddinc-app.appspot.com/o/customer%2F${spaceRef.name}?alt=media&token=76144a38-b34a-484e-a56e-226e95f97f04`
+                );
+                break;
+              case "potrait3":
+                setPotrait3(
+                  `https://firebasestorage.googleapis.com/v0/b/weddinc-app.appspot.com/o/customer%2F${spaceRef.name}?alt=media&token=76144a38-b34a-484e-a56e-226e95f97f04`
+                );
+                break;
+              case "potrait4":
+                setPotrait4(
+                  `https://firebasestorage.googleapis.com/v0/b/weddinc-app.appspot.com/o/customer%2F${spaceRef.name}?alt=media&token=76144a38-b34a-484e-a56e-226e95f97f04`
+                );
+                break;
+              case "video_potrait":
+                setVideoPotrait(
+                  `https://firebasestorage.googleapis.com/v0/b/weddinc-app.appspot.com/o/customer%2F${spaceRef.name}?alt=media&token=76144a38-b34a-484e-a56e-226e95f97f04`
+                );
+                break;
+              case "video_landscape":
+                setVideoLandscape(
+                  `https://firebasestorage.googleapis.com/v0/b/weddinc-app.appspot.com/o/customer%2F${spaceRef.name}?alt=media&token=76144a38-b34a-484e-a56e-226e95f97f04`
+                );
+                break;
+
+              default:
+                break;
+            }
+          });
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
+
   return (
     <>
       <div className="relative w-full h-full">
@@ -310,7 +408,7 @@ const Main = () => {
           >
             {/* section event */}
             <img
-              src={eventPhoto}
+              src={landscape1}
               className="w-[293px] h-[293px] object-cover mt-20"
             />
             <Countdown date={targetDate} renderer={renderer} />
@@ -319,15 +417,18 @@ const Main = () => {
               data-sal="fade"
               data-sal-duration="2000"
             >
-              {t("home.qoutes")}
+              {data?.qoutes}
             </span>
-            <img src={eventBannerPhoto} className="mt-10" />
+            <img
+              src={landscape2}
+              className="mt-10 w-full h-[123px] object-cover"
+            />
 
             {/* section man */}
             <div className="flex flex-col items-start w-full px-10">
               <img
-                src={manPhoto}
-                className="mt-16"
+                src={personMan}
+                className="mt-16 w-[293px] h-[364px] rounded-t-[145px] object-cover"
                 data-sal="zoom-out"
                 data-sal-duration="2000"
                 loading="lazy"
@@ -337,7 +438,7 @@ const Main = () => {
                 data-sal="fade"
                 data-sal-duration="2000"
               >
-                Elgi Riyadi Putra
+                {data?.fullname_man}
               </span>
               <span
                 className="w-full text-xs text-center text-white"
@@ -354,7 +455,7 @@ const Main = () => {
                 {t("home.manDescription")}
               </span>
               <Link
-                to="https://www.instagram.com/elgirputra/"
+                to={`https://www.instagram.com/${data?.instagram_man}/`}
                 target="_blank"
                 className="flex flex-row items-center gap-3 mt-5"
                 data-sal="fade"
@@ -365,14 +466,17 @@ const Main = () => {
                   className="object-cover h-5"
                   loading="lazy"
                 />
-                <span className="text-sm text-white roboto-medium">Elgi</span>
+                <span className="text-sm text-white roboto-medium">
+                  {data?.nickname_man}
+                </span>
               </Link>
             </div>
 
             {/* section woman */}
             <div className="flex flex-col items-end w-full px-10 mb-12 mt-14">
               <img
-                src={womanPhoto}
+                src={personWoman}
+                className="w-[293px] h-[364px] rounded-t-[145px] object-cover"
                 data-sal="zoom-out"
                 data-sal-duration="2000"
                 loading="lazy"
@@ -382,7 +486,7 @@ const Main = () => {
                 data-sal="fade"
                 data-sal-duration="2000"
               >
-                Qisti Astami Marifah
+                {data?.fullname_woman}
               </span>
               <span
                 className="w-full text-xs text-center text-white"
@@ -399,7 +503,7 @@ const Main = () => {
                 {t("home.womanDescription")}
               </span>
               <Link
-                to="https://www.instagram.com/qistiastami/"
+                to={`https://www.instagram.com/${data?.instagram_man}/`}
                 target="_blank"
                 className="flex flex-row items-center gap-3 mt-5"
                 data-sal="fade"
@@ -410,7 +514,9 @@ const Main = () => {
                   className="object-cover h-5"
                   loading="lazy"
                 />
-                <span className="text-sm text-white roboto-medium">Qisti</span>
+                <span className="text-sm text-white roboto-medium">
+                  {data?.nickname_woman}
+                </span>
               </Link>
               <div className="h-[2px] bg-soft-white w-full rounded mt-14">
                 &nbsp;
@@ -425,9 +531,8 @@ const Main = () => {
                 data-sal-duration="2000"
               >
                 {t("home.journeyTitleStart")} <br />
-                {t("home.journeyTitleMiddle")}{" "}
                 <span className="roboto-medium">
-                  {import.meta.env.VITE_CLIENT_NAME}
+                  {data?.nickname_woman} & {data?.nickname_man}
                 </span>{" "}
                 <br />
                 {t("home.journeyTitleEnd")}
@@ -465,9 +570,9 @@ const Main = () => {
                 data-sal="fade"
                 data-sal-duration="2000"
               >
-                {t("home.receptionDate")}
+                {data?.date_wedding}
                 <br />
-                {t("home.receptionTime")}
+                {data?.time_wedding}
               </span>
               <div className="flex flex-row items-center justify-start justify-center w-full gap-3 mt-3">
                 <CiCalendarDate className="text-xl text-white" />
@@ -483,19 +588,18 @@ const Main = () => {
                 data-sal="fade"
                 data-sal-duration="2000"
               >
-                Taman Ponyo
+                {data?.location_wedding}
               </span>
               <span
                 className="w-full mt-1 text-xs leading-normal text-center text-white"
                 data-sal="fade"
                 data-sal-duration="2000"
               >
-                Jl. Raya Cinunuk No.186, Cinunuk, Kec. Cileunyi, Kabupaten
-                Bandung, Jawa Barat 40624
+                {data?.address_location_wedding}
               </span>
               <div className="flex justify-center w-full">
                 <Link
-                  to="https://maps.app.goo.gl/LoxzCDED2PhWCJB16"
+                  to={data?.gmaps_location_wedding}
                   target="_blank"
                   className="flex flex-row gap-3 mt-5 mb-10 text-center"
                   data-sal="fade"
@@ -679,8 +783,8 @@ const Main = () => {
             >
               <div className="flex flex-row items-end gap-4 mt-20">
                 <img
-                  src={giftPhoto}
-                  className="w-[150px] h-[150px] object-cover"
+                  src={landscape3}
+                  className="w-[120px] h-[150px] object-cover rounded-t-[105px]"
                   data-sal="zoom-out"
                   data-sal-duration="2000"
                   loading="lazy"
@@ -707,10 +811,14 @@ const Main = () => {
                   data-sal-duration="2000"
                 >
                   <div className="flex flex-row items-center gap-3">
-                    <span className="text-sm text-white">6395140438</span>
+                    <span className="text-sm text-white">
+                      {data?.account_number_wedding_man}
+                    </span>
                     <button
                       onClick={() => {
-                        navigator.clipboard.writeText("6395140438");
+                        navigator.clipboard.writeText(
+                          data?.account_number_wedding_man
+                        );
                         setTimeout(() => {
                           alert("Copied Successfully");
                         }, 1000);
@@ -723,7 +831,9 @@ const Main = () => {
                       />
                     </button>
                   </div>
-                  <span className="text-xs text-white">BCA a/n Elgi</span>
+                  <span className="text-xs text-white">
+                    {data?.account_name_wedding_man}
+                  </span>
                 </div>
                 <div
                   className="flex flex-col"
@@ -731,10 +841,14 @@ const Main = () => {
                   data-sal-duration="2000"
                 >
                   <div className="flex flex-row items-center gap-3">
-                    <span className="text-sm text-white">0083483919</span>
+                    <span className="text-sm text-white">
+                      {data?.account_number_wedding_woman}
+                    </span>
                     <button
                       onClick={() => {
-                        navigator.clipboard.writeText("0083483919");
+                        navigator.clipboard.writeText(
+                          data?.account_number_wedding_woman
+                        );
                         setTimeout(() => {
                           alert("Copied Successfully");
                         }, 1000);
@@ -747,7 +861,9 @@ const Main = () => {
                       />
                     </button>
                   </div>
-                  <span className="text-xs text-white">BCA a/n Qisti</span>
+                  <span className="text-xs text-white">
+                    {data?.account_name_wedding_woman}
+                  </span>
                 </div>
               </div>
             </div>
@@ -781,57 +897,57 @@ const Main = () => {
                 </div>
                 <div className="flex flex-row w-full gap-2">
                   <img
-                    src={gallery1}
+                    src={potrait1}
                     className="h-[215px] w-full object-cover rounded-lg"
                     data-sal="zoom-out"
                     data-sal-duration="2000"
                     loading="lazy"
                     onClick={() => {
-                      showDetailImage(gallery1);
+                      showDetailImage(potrait1);
                     }}
                   />
                   <img
-                    src={gallery2}
+                    src={potrait2}
                     className="h-[215px] w-full object-cover rounded-lg"
                     data-sal="zoom-out"
                     data-sal-duration="2000"
                     loading="lazy"
                     onClick={() => {
-                      showDetailImage(gallery2);
+                      showDetailImage(potrait2);
                     }}
                   />
                 </div>
                 <div className="flex flex-row w-full my-2">
                   <img
-                    src={gallery3}
+                    src={landscape1}
                     className="h-[195px] w-full object-cover rounded-lg"
                     data-sal="zoom-out"
                     data-sal-duration="2000"
                     loading="lazy"
                     onClick={() => {
-                      showDetailImage(gallery3);
+                      showDetailImage(landscape1);
                     }}
                   />
                 </div>
                 <div className="flex flex-row w-full gap-2">
                   <img
-                    src={gallery4}
+                    src={potrait4}
                     className="h-[215px] w-full object-cover rounded-lg"
                     data-sal="zoom-out"
                     data-sal-duration="2000"
                     loading="lazy"
                     onClick={() => {
-                      showDetailImage(gallery4);
+                      showDetailImage(potrait4);
                     }}
                   />
                   <img
-                    src={gallery5}
+                    src={potrait1}
                     className="h-[215px] w-full object-cover rounded-lg"
                     data-sal="zoom-out"
                     data-sal-duration="2000"
                     loading="lazy"
                     onClick={() => {
-                      showDetailImage(gallery5);
+                      showDetailImage(potrait1);
                     }}
                   />
                 </div>
@@ -858,7 +974,7 @@ const Main = () => {
                 data-sal="fade"
                 data-sal-duration="2000"
               >
-                {import.meta.env.VITE_CLIENT_NAME}
+                {data?.nickname_woman} {data?.nickname_man}
               </span>
               <div className="mb-5 mt-36">
                 <Footer data-sal="fade" data-sal-duration="2000" />
