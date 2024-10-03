@@ -142,6 +142,7 @@ const Cover = () => {
               <div className="flex justify-center">
                 <img
                   src={potrait1}
+                  loading="lazy"
                   className="w-[211px] h-[265px] rounded-t-[145px] object-cover"
                 />
               </div>

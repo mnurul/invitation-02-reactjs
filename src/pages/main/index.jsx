@@ -409,6 +409,7 @@ const Main = () => {
             {/* section event */}
             <img
               src={landscape1}
+              loading="lazy"
               className="w-[293px] h-[293px] object-cover mt-20"
             />
             <Countdown date={targetDate} renderer={renderer} />
@@ -421,6 +422,7 @@ const Main = () => {
             </span>
             <img
               src={landscape2}
+              loading="lazy"
               className="mt-10 w-full h-[123px] object-cover"
             />
 
